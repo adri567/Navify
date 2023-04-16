@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-protocol Coordinator {
+public protocol Coordinator {
         
     associatedtype R: Router
     
     /// The path that every coordinator should have, represented as an array of `Screen`s.
     var screens: [Screen<R>] { get set }
     
-    var view: AnyView { get set }
+    /// Optional alert propertie for showing alerts and confirmation dialogs
+    var alert: NavifyAlert { get set }
     
     /// Pop to the root view of the navigation stack.
     func popToRoot() -> Void
@@ -25,17 +26,20 @@ protocol Coordinator {
     ///   - style: The style of the segue used to present the destination view or screen.
     func navigateTo(_ view: R, style: Types)
     
-    func presentAlert(of type: AlertOption, and alertContent: @escaping () -> some View)
+    /// Presents a alert or a confirmationDialog
+    /// - Parameter alert: Expecting a NavifyAlert for creating views inside the alert such as Text or Button
+    func presentAlert(with alert: NavifyAlert)
 }
 
-extension Coordinator {
+public extension Coordinator {
     
-    var view: AnyView {
+    var alert: NavifyAlert {
         get {
-            return AnyView(EmptyView())
+            NavifyAlert(title: "")
         }
         set {}
     }
-    func presentAlert(of type: AlertOption, and alertContent: @escaping () -> some View) {}
+    
+    func presentAlert(with alert: NavifyAlert) {}
 }
 

@@ -14,7 +14,7 @@ extension View {
             .modifier(NavigationModifier(data: data, destination: destination))
     }
     
-    func present<V: View, S: Router>(latestScreen: Binding<Screen<S>?>, @ViewBuilder destination: @escaping (S) -> V) -> some View {
+    func presentSheet<V: View, S: Router>(latestScreen: Binding<Screen<S>?>, @ViewBuilder destination: @escaping (S) -> V) -> some View {
         self
             .modifier(SheetModifier(latestScreen: latestScreen, destination: destination))
     }
@@ -24,8 +24,8 @@ extension View {
             .modifier(FullScreenModifier(latestScreen: latestScreen, destination: destination))
     }
     
-    func alert() -> some View {
+    func presentAlert(alert: Binding<NavifyAlert>) -> some View {
         self
-            .modifier(AlertModifier())
+            .modifier(AlertModifier(alert: alert))
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol Router: Identifiable, Hashable {
+public protocol Router: Identifiable, Hashable {
     
     /// In order to navigate to a specific view, we need a destination. The destination should be the struct Destintaion
     //    associatedtype D

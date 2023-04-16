@@ -7,18 +7,13 @@
 
 public struct Types {
     
+    // MARK: - Properties
     var transition: Transition
-    
     var detents: Detents
     
-    init(segue: Transition) {
-        self.transition = segue
-        detents = Detents()
-    }
-    
-    init(
+    public init(
         segue: Transition,
-        detents: Detents
+        detents: Detents = Detents()
     ) {
         self.transition = segue
         self.detents = detents

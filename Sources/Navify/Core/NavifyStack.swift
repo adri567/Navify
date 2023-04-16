@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct NavifyStack<D: Router, Content: View>: View {
+public struct NavifyStack<D: Router, Content: View>: View {
     
     // MARK: - Binding properties
     @Binding var screens: [Screen<D>]
+    
+    @Binding var alert: NavifyAlert
     
     // MARK: - ViewBuilder properties
     @ViewBuilder var content: Content
@@ -23,16 +25,18 @@ struct NavifyStack<D: Router, Content: View>: View {
     /// Is equal the screen that has a '.present' style
     @State private var latestScreen: Screen<D>? = nil
     
-    init(
+    public init(
         screens: Binding<[Screen<D>]>,
+        alert: Binding<NavifyAlert> = .constant(.init(title: "")),
         @ViewBuilder content: @escaping() -> Content
     ) {
         self._screens = screens
+        self._alert = alert
         self.content = content()
     }
     
     // MARK: - Body
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $path) {
             content
                 .navigation(data: D.self) { destination in
@@ -46,7 +50,7 @@ struct NavifyStack<D: Router, Content: View>: View {
                         }
                 }
         }
-        .present(latestScreen: $latestScreen, destination: { destination in
+        .presentSheet(latestScreen: $latestScreen, destination: { destination in
             NavifyStackContainerView(latestScreen: $latestScreen, screens: $screens) {
                 destination.viewForDestination()
             }
@@ -56,13 +60,13 @@ struct NavifyStack<D: Router, Content: View>: View {
                 destination.viewForDestination()
             }
         })
+        .presentAlert(alert: $alert)
         .onChange(of: screens) { newValue in
             print("currentScreens", screens.map { $0.view})
             if let screen = newValue.last {
                 
                 if let index = newValue.lazy.firstIndex(where: { $0.id == screen.id }) {
                     if newValue.count > 1 {
-                        
                         if screens[index - 1].style.transition == .present ||
                             screens[index - 1].style.transition == .presentFullScreen {
                             latestScreen = nil
@@ -93,9 +97,11 @@ struct NavifyStack<D: Router, Content: View>: View {
                 }
             } else {
                 if screens.isEmpty {
+                    // TODO: 1 - If latestScreen is set to nil it causes Update NavigationRequestObserver tried to update multiple times per frame.
                     latestScreen = nil
                 }
             }
+            // TODO: - Look at todo 1
             popToRoot()
         }
     }
@@ -103,6 +109,7 @@ struct NavifyStack<D: Router, Content: View>: View {
     // MARK: - Methods
     /// Pops to root when every element is deleted from the path and pathStack
     private func popToRoot() {
+        print("te")
         if screens.count == 0 {
             latestScreen = nil
             pathStack.removeLast(pathStack.count)

@@ -9,10 +9,11 @@ import SwiftUI
 
 public struct Detents {
     
+    // MARK: - Properties
     var presentationDragIndicator: Visibility
     var presentationDetents: Set<PresentationDetent>
     
-    init(
+    public init(
         presentationDragIndicator: Visibility = .automatic,
         presentationDetents: Set<PresentationDetent> = [.large])
     {

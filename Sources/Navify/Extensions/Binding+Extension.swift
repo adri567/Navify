@@ -17,4 +17,13 @@ extension Binding {
             
         }
     }
+    
+    init(option: AlertOption) where Value == Bool {
+        self.init {
+            option == .alert || option == .confirmationDialog ? true : false
+        } set: { _ in
+            
+        }
+
+    }
 }
