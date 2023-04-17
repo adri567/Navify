@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 public struct NavifyStack<D: Router, Content: View>: View {
     
     // MARK: - Binding properties
@@ -62,11 +63,12 @@ public struct NavifyStack<D: Router, Content: View>: View {
         })
         .presentAlert(alert: $alert)
         .onChange(of: screens) { newValue in
-            print("currentScreens", screens.map { $0.view})
+            
             if let screen = newValue.last {
                 
                 if let index = newValue.lazy.firstIndex(where: { $0.id == screen.id }) {
                     if newValue.count > 1 {
+                        /// If the transition is equal to 'present' and 'presentFullScreen' we set 'latestScreen' to nil and removing the previous screen. This is needed, otherwise we have a a unvalid view in our screen path.
                         if screens[index - 1].style.transition == .present ||
                             screens[index - 1].style.transition == .presentFullScreen {
                             latestScreen = nil
@@ -76,7 +78,6 @@ public struct NavifyStack<D: Router, Content: View>: View {
                 }
                 
                 if screen.style.transition == .push {
-                    
                     /// This needs to be inside a task; otherwise, it can lead to unexpected behavior of the navigation.
                     Task {
                         /// To avoid duplicated, we check if screen already exist in the pathStack
@@ -95,13 +96,8 @@ public struct NavifyStack<D: Router, Content: View>: View {
                         latestScreen = screen
                     }
                 }
-            } else {
-                if screens.isEmpty {
-                    // TODO: 1 - If latestScreen is set to nil it causes Update NavigationRequestObserver tried to update multiple times per frame.
-                    latestScreen = nil
-                }
             }
-            // TODO: - Look at todo 1
+            
             popToRoot()
         }
     }
@@ -109,9 +105,10 @@ public struct NavifyStack<D: Router, Content: View>: View {
     // MARK: - Methods
     /// Pops to root when every element is deleted from the path and pathStack
     private func popToRoot() {
-        print("te")
-        if screens.count == 0 {
-            latestScreen = nil
+        if screens.isEmpty {
+            if latestScreen != nil {
+                latestScreen = nil
+            }
             pathStack.removeLast(pathStack.count)
             path.removeLast(path.count)
         }

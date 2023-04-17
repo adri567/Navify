@@ -17,7 +17,7 @@ struct NavifyStackContainerView<D: Router, Content: View>: View {
     var screens: Binding<[Screen<D>]>
     let content: Content
     
-    public init(
+    init(
         latestScreen: Binding<Screen<D>?>,
         screens: Binding<[Screen<D>]>,
         @ViewBuilder _ content: @escaping() -> Content
