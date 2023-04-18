@@ -29,6 +29,7 @@ Navify requires iOS 16 and Xcode 14.
 import Navify
 ```
 
+
 2. Next, you need a Router enum and a Coordinator class.
 
 ```swift
@@ -81,6 +82,7 @@ class HomeCoordinator<R: Router>: ObservableObject, Coordinator {
 }
 ```
 > The coordinator class must be a generic of type Router and needs to conform to the Coordinator Protocol. You need to implement the screens property, popToRoot() and func  navigateTo(_ view: R, style:  Types) methods like in the example above. If you want to use an alert in your app, you can implement the alert property and method too.
+
 
 3. Afterwards you need the NavifyStack which is similar like the NavigationStack.
 
