@@ -105,15 +105,15 @@ struct NavifyTestApp: App {
 
 struct ContentView: View {
 
-	// MARK: - Properties
+    // MARK: - Properties
     @EnvironmentObject private var coordinator: HomeCoordinator<HomeRouter>
 
-	// MARK: - Body
+    // MARK: - Body
     var body: some View {
-	     NavifyStack(screens: $coordinator.screens, alert: $coordinator.alert) {
-		     HomeView()
-	     }
-     }
+    	NavifyStack(screens: $coordinator.screens, alert: $coordinator.alert) {
+		HomeView()
+	}
+    }
 }
 ```
 > The alert parameter is optional. If you choose not to use alerts in your app, you can simply use the screens parameter instead.
@@ -189,7 +189,7 @@ struct HomeView: View {
     }
         
     @ViewBuilder private var buttons: some View {
-		/// You can also use TextField with Buttons
+	/// You can also use TextField with Buttons
         Button("Button1") {}
         Button("Button2") {}
     }
@@ -202,7 +202,7 @@ struct HomeView: View {
 ```swift
 struct Feed: View {
 
-	// MARK: - Properties
+    // MARK: - Properties
     @EnvironmentObject private var coordinator: HomeCoordinator<HomeRouter>
     @Environment(\.dismiss) private var dismiss
     
