@@ -141,7 +141,7 @@ struct HomeView: View {
                 coordinator.navigateTo(.feed, style: .init(segue: .present))
             }
             Button("Present with Detents") {
-                coordinator.navigateTo(.settings, style: .init(segue: .present, detents: Detents(presentationDetents: [.medium])))
+                coordinator.navigateTo(.feed, style: .init(segue: .present, detents: Detents(presentationDetents: [.medium])))
             }
             Button("PresentFullScreen") {
                 coordinator.navigateTo(.feed, style: .init(segue: .presentFullScreen))
@@ -220,9 +220,6 @@ struct Feed: View {
             Button("dismiss") {
                 dismiss()
             }
-        }
-        .sheet(isPresented: $preseting) {
-            Text("test")
         }
     }
 }
