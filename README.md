@@ -2,7 +2,8 @@
   <img src="https://user-images.githubusercontent.com/26815443/232783649-896a94cf-7fb0-49c7-a0b2-4ac5a85862f6.png" width="600"/>
 </div>
 
-
+<br>
+<br>
 
 Navify is a SwiftUI package that simplifies navigation in your app by using a router and coordinator pattern. It provides a clean and organized way to handle navigation, presentation, and alerts.
 
