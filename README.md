@@ -189,7 +189,7 @@ struct HomeView: View {
     }
         
     @ViewBuilder private var buttons: some View {
-	/// You can also use TextField with Buttons
+		/// You can also use TextField with Buttons
         Button("Button1") {}
         Button("Button2") {}
     }
@@ -202,7 +202,7 @@ struct HomeView: View {
 ```swift
 struct Feed: View {
 
-    // MARK: - Properties
+	// MARK: - Properties
     @EnvironmentObject private var coordinator: HomeCoordinator<HomeRouter>
     @Environment(\.dismiss) private var dismiss
     
@@ -223,3 +223,4 @@ struct Feed: View {
     }
 }
 ```
+
