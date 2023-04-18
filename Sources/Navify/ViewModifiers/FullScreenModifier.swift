@@ -19,7 +19,6 @@ struct FullScreenModifier<H: Hashable, V: View, S: Router>: ViewModifier {
             .fullScreenCover(item: Binding(selected: latestScreen.wrappedValue?.style.transition, option: .presentFullScreen, value: latestScreen), content: { destination in
                 if let view = destination as? H {
                     self.destination(view)
-                        .background(.red)
                 }
             })
     }
