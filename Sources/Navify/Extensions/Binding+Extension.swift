@@ -14,7 +14,7 @@ extension Binding {
             guard let selectedStyle = selected else { return nil }
             return selectedStyle == option ? value.wrappedValue?.view : nil
         } set: { _ in
-            
+            value.wrappedValue = nil
         }
     }
     

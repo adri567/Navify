@@ -63,7 +63,6 @@ public struct NavifyStack<D: Router, Content: View>: View {
         })
         .presentAlert(alert: $alert)
         .onChange(of: screens) { newValue in
-            
             if let screen = newValue.last {
                 
                 if let index = newValue.lazy.firstIndex(where: { $0.id == screen.id }) {
