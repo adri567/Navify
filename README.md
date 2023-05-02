@@ -86,7 +86,7 @@ class MyCoordinator<R: Router>: ObservableObject, Coordinator {
 4. Afterwards you need the NavifyStack which is similar like the NavigationStack.
 
 ```swift
-	NavifyStack(screens: Binding<[Screen<D>]>, alert: Binding<NavifyAlert>, content: () -> Content)
+    NavifyStack(screens: Binding<[Screen<D>]>, alert: Binding<NavifyAlert>, content: () -> Content)
 ```
 > The alert parameter is optional. If you choose not to use alerts in your app, you can simply use the screens parameter instead.
 
