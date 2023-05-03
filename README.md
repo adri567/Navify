@@ -106,6 +106,5 @@ class MyCoordinator<R: Router>: ObservableObject, Coordinator {
 
 ```swift
     @Environment(\.dismiss) private var dismiss
-  
 ```
 
